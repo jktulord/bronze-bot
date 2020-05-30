@@ -12,6 +12,12 @@ class basic(commands.Cog):
     async def on_ready(self):
         print("Bot is online.....")
 
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        print(f'{member} has joined the server')
+        role = discord.utils.get(member.guild.roles, name='Новачки')
+        await member.add_roles(role)
+
     @commands.command()
     async def ping(self, ctx):
         await ctx.send('Pong!')
