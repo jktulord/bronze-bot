@@ -5,7 +5,7 @@ from discord.ext import commands
 import functs
 
 
-class basic(commands.Cog):
+class fun(commands.Cog):
 
     def __init__(self, client):
         self.client = client
@@ -23,4 +23,4 @@ class basic(commands.Cog):
         await ctx.send('СТУКОВ')
 
 def setup(client):
-    client.add_cog(basic(client))
+    client.add_cog(fun(client))

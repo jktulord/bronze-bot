@@ -5,7 +5,7 @@ from discord.ext import commands
 import functs
 
 
-class basic(commands.Cog):
+class random_Hero(commands.Cog):
 
     def __init__(self, client):
         self.client = client
@@ -39,7 +39,7 @@ class basic(commands.Cog):
             chosen_hero = random.choice(data["Жир"])
         elif tag in ["Поддержка", "поддержка"]:
             chosen_hero = random.choice(data["Поддержка"])
-        elif tag in ["Ебоклаки", "ебоклаки"]:
+        elif tag in ["Ебоклаки", "ебоклаки", "Ебоклака", "ебоклака"]:
             chosen_hero = random.choice(data["Ебоклаки"])
 
         if tag in ["Help", "help"]:
@@ -52,4 +52,4 @@ class basic(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(basic(client))
+    client.add_cog(random_Hero(client))
