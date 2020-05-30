@@ -24,7 +24,7 @@ class basic(commands.Cog):
     @commands.command()
     async def get(self, ctx):
         author = ctx.message.author
-        role = discord.utils.get(author.guild.roles, name='Новачки')
+        role = discord.utils.get(author.guild.roles, name='Хотсеры')
         await author.add_roles(role)
         embed = functs.text_embed(author.name + ' теперь Хотсер')
         await ctx.send(embed=embed)
