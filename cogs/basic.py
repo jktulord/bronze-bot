@@ -28,12 +28,19 @@ class basic(commands.Cog):
     #    await ctx.channel.purge(limit=n)
 
     @commands.command()
-    async def get(self, ctx):
+    async def getHots(self, ctx):
         author = ctx.message.author
         role = discord.utils.get(author.guild.roles, name='Хотсеры')
-        await author.add_roles(role)
-        embed = functs.text_embed(author.name + ' теперь Хотсер')
-        await ctx.send(embed=embed)
+        if role in author.roles:
+            roles = author.roles
+            roles.remove(role)
+            await author.edit(roles=roles)
+            embed = functs.text_embed(author.name + ' теперь НЕ Хотсер')
+            await ctx.send(embed=embed)
+        else:
+            await author.add_roles(role)
+            embed = functs.text_embed(author.name + ' теперь Хотсер')
+            await ctx.send(embed=embed)
 
 
 def setup(client):
