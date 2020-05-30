@@ -1,14 +1,16 @@
 import discord
 
-def text_embed(text):
+
+def text_embed(text, name='BRONZETECH'):
     embed = discord.Embed(
-        Title = 'Title',
-        description = text,
-        colour = discord.Color.orange()
+        Title='Title',
+        description=text,
+        colour=discord.Color.orange()
     )
-    embed.set_author(name='BRONZETECH')
+    embed.set_author(name=name)
 
     return embed
+
 
 def stats_embed(ctx):
     embed = discord.Embed(

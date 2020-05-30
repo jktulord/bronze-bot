@@ -22,10 +22,33 @@ class basic(commands.Cog):
         embed = functs.text_embed("БОГ РАНДОМА ПОВЕЛЕВАЕТ, пикай ето: " + chosen_hero)
         await ctx.send(embed=embed)
 
-    #@commands.command()
-    #async def randomHero(self, ctx, tag):
-    #    with open("Heroes.json", "r") as read_file:
-    #        data = json.load(read_file)
+    @commands.command()
+    async def randomHero(self, ctx, tag="Help"):
+        with open("Heroes.json", "r") as read_file:
+            data = json.load(read_file)
+            chosen_hero = "....пропиши !randomHero help, чувак..."
+        if tag in ["all", "все"]:
+            chosen_hero = random.choice(data["Heroes"])
+        elif tag in ["ААтакеры", "ААтакер", "AA", "АА"]:
+            chosen_hero = random.choice(data["ААтакеры"])
+        elif tag in ["Маги", "Маг", "маг", "маги"]:
+            chosen_hero = random.choice(data["Маги"])
+        elif tag in ["Лекари", "Лекарь", "лекари", "лекарь"]:
+            chosen_hero = random.choice(data["Лекари"])
+        elif tag in ["Жир", "жир"]:
+            chosen_hero = random.choice(data["Жир"])
+        elif tag in ["Поддержка", "поддержка"]:
+            chosen_hero = random.choice(data["Поддержка"])
+        elif tag in ["Ебоклаки", "ебоклаки"]:
+            chosen_hero = random.choice(data["Ебоклаки"])
+
+        if tag in ["Help", "help"]:
+            embed = functs.text_embed('Команде randoHero требуется тег '
+                                      '(Доступные теги: Маги, ААтакеры, Ебоклаки, Лекари, Жир, Поддержка)')
+            await ctx.send(embed=embed)
+        else:
+            embed = functs.text_embed("БОГ РАНДОМА ПОВЕЛЕВАЕТ, пикай вот это: " + chosen_hero, name="БОГ РАНДОМА")
+            await ctx.send(embed=embed)
 
 
 def setup(client):
