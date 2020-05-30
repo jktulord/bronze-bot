@@ -22,10 +22,10 @@ class basic(commands.Cog):
     async def ping(self, ctx):
         await ctx.send('Pong!')
 
-    @commands.command(aliases=['purge', 'CLEAR', 'PURGE'])
-    async def clear(self, ctx, arg=5):
-        n = arg
-        await ctx.channel.purge(limit=n)
+    #@commands.command(aliases=['purge', 'CLEAR', 'PURGE'])
+    #async def clear(self, ctx, arg=5):
+    #    n = arg
+    #    await ctx.channel.purge(limit=n)
 
     @commands.command()
     async def get(self, ctx):
