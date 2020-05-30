@@ -22,6 +22,11 @@ class basic(commands.Cog):
         embed = functs.text_embed("БОГ РАНДОМА ПОВЕЛЕВАЕТ, пикай ето: " + chosen_hero)
         await ctx.send(embed=embed)
 
+    #@commands.command()
+    #async def randomHero(self, ctx, tag):
+    #    with open("Heroes.json", "r") as read_file:
+    #        data = json.load(read_file)
+
 
 def setup(client):
     client.add_cog(basic(client))
