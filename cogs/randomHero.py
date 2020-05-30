@@ -27,7 +27,7 @@ class random_Hero(commands.Cog):
         with open("Heroes.json", "r") as read_file:
             data = json.load(read_file)
             chosen_hero = "....пропиши !randomHero help, чувак..."
-        if tag in ["all", "все"]:
+        if tag in ["All", "all", "все", "Все"]:
             chosen_hero = random.choice(data["Heroes"])
         elif tag in ["ААтакеры", "ААтакер", "AA", "АА"]:
             chosen_hero = random.choice(data["ААтакеры"])
@@ -44,7 +44,7 @@ class random_Hero(commands.Cog):
 
         if tag in ["Help", "help"]:
             embed = functs.text_embed('Команде randoHero требуется тег '
-                                      '(Доступные теги: Маги, ААтакеры, Ебоклаки, Лекари, Жир, Поддержка)')
+                                      '(Доступные теги:Вcе, Маги, ААтакеры, Ебоклаки, Лекари, Жир, Поддержка)')
             await ctx.send(embed=embed)
         else:
             embed = functs.text_embed("БОГ РАНДОМА ПОВЕЛЕВАЕТ, пикай вот это: " + chosen_hero, name="БОГ РАНДОМА")
