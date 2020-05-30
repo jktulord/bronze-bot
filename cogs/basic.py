@@ -27,7 +27,7 @@ class basic(commands.Cog):
     #    n = arg
     #    await ctx.channel.purge(limit=n)
 
-    @commands.command()
+    @commands.command(aliases=['getHotser'])
     async def getHots(self, ctx):
         author = ctx.message.author
         role = discord.utils.get(author.guild.roles, name='Хотсеры')
