@@ -39,10 +39,10 @@ def update_user(message):
     user = cur.fetch("SELECT * FROM users WHERE user_id = $1 AND guild_id = $2", author_id, guild_id)
 
     if not user:
-        await cur.fetch.execute("INSERT INTO users (user_id, guild_id, level, likes, free_likes) VALUES ($1, $2, 1, 0, 0")
+        cur.fetch.execute("INSERT INTO users (user_id, guild_id, level, likes, free_likes) VALUES ($1, $2, 1, 0, 0")
 
     user = cur.fetchrow("SELECT * FROM users WHERE user_id = $1 AND guild_id = $2", author_id, guild_id)
-    await cur.execute("UPDATE users SET free_likes = $1 WHERE user_id = $2 AND guild_id = $3", 1, user['user_id'], user['guild_id'])
+    cur.execute("UPDATE users SET free_likes = $1 WHERE user_id = $2 AND guild_id = $3", 1, user['user_id'], user['guild_id'])
     print(user)
 
 class likes(commands.Cog):
