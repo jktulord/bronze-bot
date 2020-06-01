@@ -22,7 +22,7 @@ class fun(commands.Cog):
 
     @commands.command(aliases=['поконям'])
     async def pokonyam(self, ctx):
-        await ctx.send('@Хотсеры , по коням')
+        await ctx.send('@Хотсеры , по коням!')
 
 def setup(client):
     client.add_cog(fun(client))
