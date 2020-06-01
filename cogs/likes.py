@@ -4,6 +4,7 @@ import random
 from discord.ext import commands
 import functs
 import psycopg2
+import time
 
 def DBconnect():
     con = psycopg2.connect(dbname='d1q1hn2qfdpfnp', user='uazfysibugwxbd',
@@ -12,22 +13,6 @@ def DBconnect():
                         port='5432')
     return con
 
-
-def users_show():
-    con = DBconnect()
-    cur = con.cursor()
-
-    cur.execute("INSERT INTO id")
-
-    cur.execute("SELECT id, name FROM users")
-
-    rows = cur.fetchall
-
-    for r in rows:
-        print(f"id{r[0]} name {r[1]}")
-
-    cur.close()
-    con.close()
 
 def create_user(message):
     con = DBconnect()
@@ -44,13 +29,27 @@ def create_user(message):
 
         print("user", author_id, guild_id, "created")
         cur.execute("INSERT INTO users (user_id, name, guild_id, level, xp, likes, recived_likes, free_likes) VALUES "
-                    "(%s, %s, %s, 1, 0, 0)", (author_id, name, guild_id))
-        cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (author_id, guild_id))
-        user = cur.fetchone()
-
+                    "(%s, %s, %s, 1, 0, 0, 0, 0)", (author_id, name, guild_id))
     
     print(user)
 
+    con.commit()
+
+    cur.close()
+    con.close()
+
+
+def midnight_update():
+    con = DBconnect()
+    cur = con.cursor()
+
+    cur.execute("SELECT * FROM users")
+    users = cur.fetchall()
+
+    for i in users:
+        cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (1, i[0], i[2]))
+
+    print("апдейт епт")
     con.commit()
 
     cur.close()
@@ -68,8 +67,13 @@ class likes(commands.Cog):
     @commands.command(aliases=['статус', 'Статус', 'Status'])
     async def status(self, ctx):
         await ctx.send("Статус")
-        update_user(ctx.message)
+        create_user(ctx.message)
 
+    @commands.command()
+    async def midnight(self, ctx):
+        await ctx.send("Полночь")
+        create_user(ctx.message)
+        midnight_update()
 
 def setup(client):
     client.add_cog(likes(client))
