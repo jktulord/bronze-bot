@@ -4,6 +4,11 @@ import random
 from discord.ext import commands
 import functs
 
+def listmerge3(lstlst):
+    all=[]
+    for lst in lstlst:
+      all.extend(lst)
+    return all
 
 class random_Hero(commands.Cog):
 
@@ -14,13 +19,13 @@ class random_Hero(commands.Cog):
     # async def on_ready(self):
     #    print("Bot is online.....")
 
-    @commands.command()
-    async def randHero(self, ctx):
-        with open("Heroes.json", "r") as read_file:
-            data = json.load(read_file)
-        chosen_hero = random.choice(data["Heroes"])
-        embed = functs.text_embed("БОГ РАНДОМА ПОВЕЛЕВАЕТ, пикай ето: " + chosen_hero)
-        await ctx.send(embed=embed)
+    #@commands.command()
+    #async def randHero(self, ctx):
+    #    with open("Heroes.json", "r") as read_file:
+    #        data = json.load(read_file)
+    #    chosen_hero = random.choice(data["Heroes"])
+    #    embed = functs.text_embed("БОГ РАНДОМА ПОВЕЛЕВАЕТ, пикай ето: " + chosen_hero)
+    #    await ctx.send(embed=embed)
 
     @commands.command()
     async def randomHero(self, ctx, tag="Help"):
@@ -33,17 +38,23 @@ class random_Hero(commands.Cog):
             chosen_hero = random.choice(data["ААтакеры"])
         elif tag in ["Маги", "Маг", "маг", "маги"]:
             chosen_hero = random.choice(data["Маги"])
-        elif tag in ["Лекари", "Лекарь", "лекари", "лекарь"]:
-            chosen_hero = random.choice(data["Лекари"])
+
         elif tag in ["Жир", "жир"]:
             chosen_hero = random.choice(data["Жир"])
+        elif tag in ["Танк", "танк", "танки", "Танки"]:
+            chosen_hero = random.choice(data["Танки1"])
+        elif tag in ["Брузяхи", "брузяхи", "Брузяха", "брузяха"]:
+            chosen_hero = random.choice(data["Брузяхи1"])
+
+        elif tag in ["Лекари", "Лекарь", "лекари", "лекарь"]:
+            chosen_hero = random.choice(data["Лекари"])
         elif tag in ["Поддержка", "поддержка"]:
             chosen_hero = random.choice(data["Поддержка"])
         elif tag in ["Ебоклаки", "ебоклаки", "Ебоклака", "ебоклака"]:
             chosen_hero = random.choice(data["Ебоклаки"])
 
         if tag in ["Help", "help"]:
-            embed = functs.text_embed('Команде randoHero требуется тег '
+            embed = functs.text_embed('Команде randomHero требуется тег '
                                       '(Доступные теги:Вcе, Маги, ААтакеры, Ебоклаки, Лекари, Жир, Поддержка)')
             await ctx.send(embed=embed)
         else:
