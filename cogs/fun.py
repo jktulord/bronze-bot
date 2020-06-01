@@ -20,5 +20,9 @@ class fun(commands.Cog):
     async def aleksey(self, ctx):
         await ctx.send('СТУКОВ')
 
+    @commands.command(aliases=['поконям'])
+    async def pokonyam(self, ctx):
+        await ctx.send('@Хотсеры, по коням')
+
 def setup(client):
     client.add_cog(fun(client))

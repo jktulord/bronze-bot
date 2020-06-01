@@ -29,25 +29,26 @@ def users_show():
     cur.close()
     con.close()
 
-def update_user(message):
+def create_user(message):
     con = DBconnect()
     cur = con.cursor()
 
     author_id = str(message.author.id)
+    name = str(message.author.name)
     guild_id = str(message.guild.id)
 
     cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (author_id, guild_id))
     user = cur.fetchone()
 
-
     if not user:
+
         print("user", author_id, guild_id, "created")
-        cur.execute("INSERT INTO users (user_id, guild_id, level, likes, free_likes) VALUES (%s, %s, 1, 0, 0)", (author_id, guild_id))
+        cur.execute("INSERT INTO users (user_id, name, guild_id, level, xp, likes, recived_likes, free_likes) VALUES "
+                    "(%s, %s, %s, 1, 0, 0)", (author_id, name, guild_id))
+        cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (author_id, guild_id))
+        user = cur.fetchone()
 
-    cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (author_id, guild_id))
-    user = cur.fetchone()
-
-    cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (1, user[0], user[1]))
+    
     print(user)
 
     con.commit()
