@@ -1,7 +1,7 @@
 import discord
 
 
-def text_embed(text, name='BronzeTech-0.1.9'):
+def text_embed(text, name='BronzeTech-0.2.0'):
     embed = discord.Embed(
         Title='Title',
         description=text,
