@@ -36,14 +36,24 @@ def update_user(message):
     author_id = str(message.author.id)
     guild_id = str(message.guild.id)
 
-    user = cur.fetch("SELECT * FROM users WHERE user_id = $1 AND guild_id = $2", author_id, guild_id)
+    cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (author_id, guild_id))
+    user = cur.fetchone()
+
 
     if not user:
-        cur.fetch.execute("INSERT INTO users (user_id, guild_id, level, likes, free_likes) VALUES ($1, $2, 1, 0, 0")
+        print("user", author_id, guild_id, "created")
+        cur.execute("INSERT INTO users (user_id, guild_id, level, likes, free_likes) VALUES (%s, %s, 1, 0, 0)", (author_id, guild_id))
 
-    user = cur.fetchrow("SELECT * FROM users WHERE user_id = $1 AND guild_id = $2", author_id, guild_id)
-    cur.execute("UPDATE users SET free_likes = $1 WHERE user_id = $2 AND guild_id = $3", 1, user['user_id'], user['guild_id'])
+    cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (author_id, guild_id))
+    user = cur.fetchone()
+
+    cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (1, user[0], user[1]))
     print(user)
+
+    con.commit()
+
+    cur.close()
+    con.close()
 
 class likes(commands.Cog):
 
@@ -56,7 +66,7 @@ class likes(commands.Cog):
 
     @commands.command(aliases=['статус', 'Статус', 'Status'])
     async def status(self, ctx):
-        ctx.send("Статус")
+        await ctx.send("Статус")
         update_user(ctx.message)
 
 
