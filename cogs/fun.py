@@ -24,7 +24,7 @@ class fun(commands.Cog):
     async def pokonyam(self, ctx):
         author = ctx.message.author
         role = discord.utils.get(author.guild.roles, name='Хотсеры')
-        await ctx.send(role.mention, ', по коням!')
+        await ctx.send(f'{role.mention}, по коням!')
 
 def setup(client):
     client.add_cog(fun(client))
