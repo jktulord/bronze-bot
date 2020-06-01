@@ -6,11 +6,12 @@ import functs
 import psycopg2
 import time
 
+
 def DBconnect():
     con = psycopg2.connect(dbname='d1q1hn2qfdpfnp', user='uazfysibugwxbd',
-                        password='e05f0827db045c3f6ab032518c87a4c6590724a5558ff69434f427ab42fa5c72',
-                        host='ec2-54-247-79-178.eu-west-1.compute.amazonaws.com',
-                        port='5432')
+                           password='e05f0827db045c3f6ab032518c87a4c6590724a5558ff69434f427ab42fa5c72',
+                           host='ec2-54-247-79-178.eu-west-1.compute.amazonaws.com',
+                           port='5432')
     return con
 
 
@@ -26,11 +27,10 @@ def create_user(message):
     user = cur.fetchone()
 
     if not user:
-
         print("user", author_id, guild_id, "created")
         cur.execute("INSERT INTO users (user_id, name, guild_id, level, xp, likes, recived_likes, free_likes) VALUES "
                     "(%s, %s, %s, 1, 0, 0, 0, 0)", (author_id, name, guild_id))
-    
+
     print(user)
 
     con.commit()
@@ -55,6 +55,7 @@ def midnight_update():
     cur.close()
     con.close()
 
+
 class likes(commands.Cog):
 
     def __init__(self, client):
@@ -74,6 +75,7 @@ class likes(commands.Cog):
         await ctx.send("Полночь")
         create_user(ctx.message)
         midnight_update()
+
 
 def setup(client):
     client.add_cog(likes(client))
