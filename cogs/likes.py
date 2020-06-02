@@ -39,7 +39,7 @@ def create_user(message):
 
     if not user:
         print("user", author_id, guild_id, "created")
-        cur.execute("INSERT INTO users (user_id, name, guild_id, level, xp, likes, recived_likes, free_likes) VALUES "
+        cur.execute("INSERT INTO users (user_id, name, guild_id, level, xp, likes, recieved_likes, free_likes) VALUES "
                     "(%s, %s, %s, 1, 0, 0, 0, 0)", (author_id, name, guild_id))
 
     print(user)
