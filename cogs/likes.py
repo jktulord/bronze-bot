@@ -60,9 +60,13 @@ def give_likes(message, name):
     reciever_id = str(reciever.id)
 
     cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (0, author_id, guild_id))
+    cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (author_id, guild_id))
+    giv = cur.fetchone()
     cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (reciever_id, guild_id))
     rec = cur.fetchone()
-    cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (rec[], author_id, guild_id))
+    cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (0, author_id, guild_id))
+    cur.execute("UPDATE users SET likes = %s WHERE user_id = %s AND guild_id = %s", (rec[5]+1, reciever_id, guild_id))
+    cur.execute("UPDATE users SET recieved_likes = %s WHERE user_id = %s AND guild_id = %s", (rec[6]+1, reciever_id, guild_id))
 
     print("апдейт епт")
     con.commit()
