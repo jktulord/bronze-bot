@@ -2,16 +2,26 @@ import discord
 import json
 import random
 from discord.ext import commands
-import functs
 import psycopg2
+from urllib.parse import urlparse
+import functs
 import time
 
 
 def DBconnect():
-    con = psycopg2.connect(dbname='d1q1hn2qfdpfnp', user='uazfysibugwxbd',
-                           password='e05f0827db045c3f6ab032518c87a4c6590724a5558ff69434f427ab42fa5c72',
-                           host='ec2-54-247-79-178.eu-west-1.compute.amazonaws.com',
-                           port='5432')
+    # for python 3+ use: from urllib.parse import urlparse
+    result = urlparse("postgres://rxzevzulpptnsi:2c4a3df53f8e0668ec61b0eba19cdd003f577a5321eb1b987e3c10bb0ed5ca63@ec2-54-247-122-209.eu-west-1.compute.amazonaws.com:5432/d2s131ckgn5o6k")
+    # also in python 3+ use: urlparse("YourUrl") not urlparse.urlparse("YourUrl")
+    username = result.username
+    password = result.password
+    database = result.path[1:]
+    hostname = result.hostname
+    con = psycopg2.connect(
+        database=database,
+        user=username,
+        password=password,
+        host=hostname
+    )
     return con
 
 
