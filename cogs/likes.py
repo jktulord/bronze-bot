@@ -20,7 +20,8 @@ def DBconnect():
         database=database,
         user=username,
         password=password,
-        host=hostname
+        host=hostname,
+        port=5432
     )
     return con
 
@@ -48,6 +49,26 @@ def create_user(message):
     cur.close()
     con.close()
 
+def give_likes(message, name):
+    con = DBconnect()
+    cur = con.cursor()
+
+    reciever = discord.utils.get(message.author.guild.members, name=name)
+
+    author_id = str(message.author.id)
+    guild_id = str(message.guild.id)
+    reciever_id = str(reciever.id)
+
+    cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (0, author_id, guild_id))
+    cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (reciever_id, guild_id))
+    rec = cur.fetchone()
+    cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (rec[], author_id, guild_id))
+
+    print("апдейт епт")
+    con.commit()
+
+    cur.close()
+    con.close()
 
 def midnight_update():
     con = DBconnect()
@@ -85,6 +106,10 @@ class likes(commands.Cog):
         await ctx.send("Полночь")
         create_user(ctx.message)
         midnight_update()
+
+    @commands.command()
+    async def give(self, ctx, name):
+        give_likes(ctx.message, name)
 
 
 def setup(client):
