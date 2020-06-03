@@ -37,7 +37,7 @@ def DBconnect():
     return con
 
 
-def create_user(message):
+def get_user(message):
     con = DBconnect()
     cur = con.cursor()
 
@@ -52,6 +52,11 @@ def create_user(message):
         print("user", author_id, guild_id, "created")
         cur.execute("INSERT INTO users (user_id, name, guild_id, copper_ore, tin_ore, bronze_ore, undefined_ore) VALUES"
                     "(%s, %s, %s, 0, 0, 0, 3)", (author_id, name, guild_id))
+
+    if user[3] is None:
+        cur.execute("UPDATE users SET copper_ore = %s, tin_ore=%s, bronze_ingot=%s, undefined_ore=%s WHERE user_id = %s AND guild_id = %s",
+                    (0,0,0,3, author_id, guild_id))
+
 
     print(user)
 
@@ -130,7 +135,7 @@ class likes(commands.Cog):
 
     @commands.command(aliases=['статус', 'Статус', 'Status'])
     async def status(self, ctx):
-        user = create_user(ctx.message)
+        user = get_user(ctx.message)
         embed = functs.status_embed(ctx, user)
         await ctx.send(embed=embed)
 
@@ -141,7 +146,7 @@ class likes(commands.Cog):
 
     @commands.command()
     async def give(self, ctx, name):
-        create_user(ctx.message)
+        get_user(ctx.message)
         gl = give_undefined_ore(ctx.message, name)
         embed = functs.give_embed(ctx, gl[0], gl[1], gl[2])
         await ctx.send(embed=embed)
