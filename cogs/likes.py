@@ -83,7 +83,7 @@ def give_undefined_ore(message, name):
     rec = cur.fetchone()
 
     res_given = res_dict()
-
+    print(giv[6] + 1)
     for i in range(giv[6]+1):
         rnd = random.randint(1, 100)
         if rnd > 33:
