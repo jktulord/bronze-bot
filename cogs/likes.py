@@ -7,11 +7,10 @@ from urllib.parse import urlparse
 import functs
 import time
 
-COPPER_ORE = "copper_ore"
-TIN_ORE = "tin_ore"
-BRONZE_INGOT = "bronze_ingot"
-UNDEFINED_ORE = "undefined_ore"
-
+COPPER_ORE = "Медная руда"
+TIN_ORE = "Оловянная руда"
+BRONZE_INGOT = "Бронзовые слитки"
+UNDEFINED_ORE = "Неопределенная руда"
 
 def res_dict():
     res_dict = {COPPER_ORE: 0, TIN_ORE: 0, BRONZE_INGOT: 0}

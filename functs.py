@@ -2,10 +2,10 @@ import discord
 
 NAME = 'BronzeTech-0.3.0'
 
-COPPER_ORE = "copper_ore"
-TIN_ORE = "tin_ore"
-BRONZE_INGOT = "bronze_ingot"
-UNDEFINED_ORE = "undefined_ore"
+COPPER_ORE = "Медная руда"
+TIN_ORE = "Оловянная руда"
+BRONZE_INGOT = "Бронзовые слитки"
+UNDEFINED_ORE = "Неопределенная руда"
 
 
 def text_embed(text, name=NAME):
