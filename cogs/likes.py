@@ -84,7 +84,7 @@ def give_undefined_ore(message, name):
 
     res_given = res_dict()
 
-    for i in range(giv[6]):
+    for i in range(giv[6]+1):
         rnd = random.randint(1, 100)
         if rnd > 33:
             cur.execute("UPDATE users SET copper_ore = %s WHERE user_id = %s AND guild_id = %s",
