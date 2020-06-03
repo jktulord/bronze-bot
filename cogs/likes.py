@@ -50,6 +50,8 @@ def create_user(message):
     cur.close()
     con.close()
 
+    return user
+
 
 def give_likes(message, name):
     con = DBconnect()
@@ -108,13 +110,12 @@ class likes(commands.Cog):
     async def status(self, ctx):
         await ctx.send("Статус")
         user = create_user(ctx.message)
-        embed=functs.status_embed(ctx, user)
+        embed = functs.status_embed(ctx, user)
         await ctx.send(embed=embed)
 
     @commands.command()
     async def midnight(self, ctx):
         await ctx.send("Полночь")
-        create_user(ctx.message)
         midnight_update()
 
     @commands.command()
