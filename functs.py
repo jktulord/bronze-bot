@@ -1,7 +1,9 @@
 import discord
 
+NAME = 'BronzeTech-0.2.0'
 
-def text_embed(text, name='BronzeTech-0.2.0'):
+
+def text_embed(text, name=NAME):
     embed = discord.Embed(
         Title='Title',
         description=text,
@@ -15,16 +17,25 @@ def text_embed(text, name='BronzeTech-0.2.0'):
 def status_embed(ctx, user):
     embed = discord.Embed(
         Title='Title',
-        description='This is your stats',
+        description='Ваш баланс лайков',
         colour=discord.Color.orange()
     )
     embed.set_author(name=ctx.message.author.name)
 
-    embed.add_field(name='Текущие Лайки', value=user[5], inline=True)
-    embed.add_field(name='Доступные Лайки', value=user[7], inline=True)
-    embed.add_field(name='Полученые Лайки', value=user[6], inline=True)
+    embed.add_field(name='Текущие', value=user[5], inline=True)
+    embed.add_field(name='Доступно', value=user[7], inline=True)
+    embed.add_field(name='Всего Получено', value=user[6], inline=True)
 
     return embed
+
+
+def give_embed(ctx, giv, rec, name=NAME):
+    embed = discord.Embed(
+        Title='Title',
+        description=giv[1] + " великодушно отдал свой лайк пользователю " + rec[1],
+        colour=discord.Color.orange()
+    )
+    embed.set_author(name=name)
 
 
 def stats_embed(ctx):

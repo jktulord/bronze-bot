@@ -79,6 +79,8 @@ def give_likes(message, name):
     cur.close()
     con.close()
 
+    return [giv, rec]
+
 
 def midnight_update():
     con = DBconnect()
@@ -121,8 +123,9 @@ class likes(commands.Cog):
     @commands.command()
     async def give(self, ctx, name):
         create_user(ctx.message)
-        give_likes(ctx.message, name)
-
+        gl = give_likes(ctx.message, name)
+        embed = functs.give_embed(ctx, gl[0], gl[1])
+        await ctx.send(embed=embed)
 
 def setup(client):
     client.add_cog(likes(client))
