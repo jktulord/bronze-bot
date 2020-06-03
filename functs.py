@@ -40,7 +40,7 @@ def give_embed(ctx, giv, rec, res_given, name=NAME):
     second = ""
     for i in res_given:
         if res_given[i] > 0:
-            second += "1 " + i + ","
+            second += str(res_given[i]) + i + ","
     third = "пользователю " + rec[1]
     embed = discord.Embed(
         Title='Title',
