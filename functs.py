@@ -22,14 +22,15 @@ def text_embed(text, name=NAME):
 def status_embed(ctx, user):
     embed = discord.Embed(
         Title='Title',
-        description='Ваш баланс лайков',
+        description='Ваш баланс руды',
         colour=discord.Color.orange()
     )
     embed.set_author(name=ctx.message.author.name)
 
-    embed.add_field(name='Текущие', value=user[5], inline=True)
-    embed.add_field(name='Доступно', value=user[7], inline=True)
-    embed.add_field(name='Всего Получено', value=user[6], inline=True)
+    embed.add_field(name='Медная руда', value=user[3], inline=True)
+    embed.add_field(name='Оловянная руда', value=user[4], inline=True)
+    embed.add_field(name='Бронзовые слитки', value=user[5], inline=True)
+    embed.add_field(name='Неопределенная руда', value=user[6], inline=True)
 
     return embed
 
