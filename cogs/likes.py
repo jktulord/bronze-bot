@@ -119,6 +119,7 @@ class likes(commands.Cog):
 
     @commands.command()
     async def give(self, ctx, name):
+        create_user(ctx.message)
         give_likes(ctx.message, name)
 
 
