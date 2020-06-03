@@ -2,6 +2,11 @@ import discord
 
 NAME = 'BronzeTech-0.2.0'
 
+COPPER_ORE = "copper_ore"
+TIN_ORE = "tin_ore"
+BRONZE_INGOT = "bronze_ingot"
+UNDEFINED_ORE = "undefined_ore"
+
 
 def text_embed(text, name=NAME):
     embed = discord.Embed(
@@ -29,15 +34,22 @@ def status_embed(ctx, user):
     return embed
 
 
-def give_embed(ctx, giv, rec, name=NAME):
+def give_embed(ctx, giv, rec, res_given, name=NAME):
+    first = giv[1] + " великодушно отдал "
+    second = ""
+    for i in res_given:
+        if res_given[i] > 0:
+            second += "1 " + i + ","
+    third = "пользователю " + rec[1]
     embed = discord.Embed(
         Title='Title',
-        description=giv[1] + " великодушно отдал свой лайк пользователю " + rec[1],
+        description=first + second + third,
         colour=discord.Color.orange()
     )
     embed.set_author(name=name)
 
     return embed
+
 
 def stats_embed(ctx):
     embed = discord.Embed(

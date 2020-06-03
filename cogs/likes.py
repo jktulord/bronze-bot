@@ -7,6 +7,16 @@ from urllib.parse import urlparse
 import functs
 import time
 
+COPPER_ORE = "copper_ore"
+TIN_ORE = "tin_ore"
+BRONZE_INGOT = "bronze_ingot"
+UNDEFINED_ORE = "undefined_ore"
+
+
+def res_dict():
+    res_dict = {COPPER_ORE: 0, TIN_ORE: 0, BRONZE_INGOT: 0}
+    return res_dict
+
 
 def DBconnect():
     # for python 3+ use: from urllib.parse import urlparse
@@ -40,8 +50,8 @@ def create_user(message):
 
     if not user:
         print("user", author_id, guild_id, "created")
-        cur.execute("INSERT INTO users (user_id, name, guild_id, level, xp, likes, recieved_likes, free_likes) VALUES "
-                    "(%s, %s, %s, 1, 0, 0, 0, 0)", (author_id, name, guild_id))
+        cur.execute("INSERT INTO users (user_id, name, guild_id, copper_ore, tin_ore, bronze_ore, undefined_ore) VALUES"
+                    "(%s, %s, %s, 0, 0, 0, 3)", (author_id, name, guild_id))
 
     print(user)
 
@@ -53,7 +63,7 @@ def create_user(message):
     return user
 
 
-def give_likes(message, name):
+def give_undefined_ore(message, name):
     con = DBconnect()
     cur = con.cursor()
 
@@ -63,15 +73,25 @@ def give_likes(message, name):
     guild_id = str(message.guild.id)
     reciever_id = str(reciever.id)
 
-    cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (0, author_id, guild_id))
     cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (author_id, guild_id))
     giv = cur.fetchone()
     cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (reciever_id, guild_id))
     rec = cur.fetchone()
-    cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (0, author_id, guild_id))
-    cur.execute("UPDATE users SET likes = %s WHERE user_id = %s AND guild_id = %s", (rec[5] + 1, reciever_id, guild_id))
-    cur.execute("UPDATE users SET recieved_likes = %s WHERE user_id = %s AND guild_id = %s",
-                (rec[6] + 1, reciever_id, guild_id))
+
+    res_given = res_dict()
+
+    for i in range(giv[6]):
+        rnd = random.randint(1, 100)
+        if rnd > 33:
+            cur.execute("UPDATE users SET copper_ore = %s WHERE user_id = %s AND guild_id = %s",
+                        (rec[3] + 1, reciever_id, guild_id))
+            res_given[COPPER_ORE] += 1
+        else:
+            cur.execute("UPDATE users SET tin_ore = %s WHERE user_id = %s AND guild_id = %s",
+                        (rec[4] + 1, reciever_id, guild_id))
+            res_given[TIN_ORE] += 1
+
+    cur.execute("UPDATE users SET undefined_ore = %s WHERE user_id = %s AND guild_id = %s", (0, author_id, guild_id))
 
     print("апдейт епт")
     con.commit()
@@ -79,7 +99,7 @@ def give_likes(message, name):
     cur.close()
     con.close()
 
-    return [giv, rec]
+    return [giv, rec, res_given]
 
 
 def midnight_update():
@@ -90,7 +110,7 @@ def midnight_update():
     users = cur.fetchall()
 
     for i in users:
-        cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (1, i[0], i[2]))
+        cur.execute("UPDATE users SET undefined_ore = %s WHERE user_id = %s AND guild_id = %s", (3, i[0], i[2]))
 
     print("апдейт епт")
     con.commit()
@@ -110,7 +130,6 @@ class likes(commands.Cog):
 
     @commands.command(aliases=['статус', 'Статус', 'Status'])
     async def status(self, ctx):
-        await ctx.send("Статус")
         user = create_user(ctx.message)
         embed = functs.status_embed(ctx, user)
         await ctx.send(embed=embed)
@@ -123,9 +142,10 @@ class likes(commands.Cog):
     @commands.command()
     async def give(self, ctx, name):
         create_user(ctx.message)
-        gl = give_likes(ctx.message, name)
-        embed = functs.give_embed(ctx, gl[0], gl[1])
+        gl = give_undefined_ore(ctx.message, name)
+        embed = functs.give_embed(ctx, gl[0], gl[1], gl[2])
         await ctx.send(embed=embed)
+
 
 def setup(client):
     client.add_cog(likes(client))
