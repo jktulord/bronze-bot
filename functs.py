@@ -37,6 +37,7 @@ def give_embed(ctx, giv, rec, name=NAME):
     )
     embed.set_author(name=name)
 
+    return embed
 
 def stats_embed(ctx):
     embed = discord.Embed(
