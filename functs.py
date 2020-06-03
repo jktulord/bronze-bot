@@ -24,6 +24,8 @@ def status_embed(ctx, user):
     embed.add_field(name='Доступные Лайки', value=user[7], inline=True)
     embed.add_field(name='Полученые Лайки', value=user[6], inline=True)
 
+    return embed
+
 
 def stats_embed(ctx):
     embed = discord.Embed(
