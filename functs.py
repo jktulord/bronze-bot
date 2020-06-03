@@ -12,7 +12,7 @@ def text_embed(text, name='BronzeTech-0.2.0'):
     return embed
 
 
-def status_embed(ctx, likes, free_likes, recieved_likes):
+def status_embed(ctx, user):
     embed = discord.Embed(
         Title='Title',
         description='This is your stats',
@@ -20,9 +20,9 @@ def status_embed(ctx, likes, free_likes, recieved_likes):
     )
     embed.set_author(name=ctx.message.author.name)
 
-    embed.add_field(name='Текущие Лайки', value=likes, inline=True)
-    embed.add_field(name='Доступные Лайки', value=free_likes, inline=True)
-    embed.add_field(name='Полученые Лайки', value=recieved_likes, inline=True)
+    embed.add_field(name='Текущие Лайки', value=user[5], inline=True)
+    embed.add_field(name='Доступные Лайки', value=user[7], inline=True)
+    embed.add_field(name='Полученые Лайки', value=user[6], inline=True)
 
 
 def stats_embed(ctx):

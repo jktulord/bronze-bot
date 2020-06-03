@@ -10,7 +10,8 @@ import time
 
 def DBconnect():
     # for python 3+ use: from urllib.parse import urlparse
-    result = urlparse("postgres://rxzevzulpptnsi:2c4a3df53f8e0668ec61b0eba19cdd003f577a5321eb1b987e3c10bb0ed5ca63@ec2-54-247-122-209.eu-west-1.compute.amazonaws.com:5432/d2s131ckgn5o6k")
+    result = urlparse(
+        "postgres://rxzevzulpptnsi:2c4a3df53f8e0668ec61b0eba19cdd003f577a5321eb1b987e3c10bb0ed5ca63@ec2-54-247-122-209.eu-west-1.compute.amazonaws.com:5432/d2s131ckgn5o6k")
     # also in python 3+ use: urlparse("YourUrl") not urlparse.urlparse("YourUrl")
     username = result.username
     password = result.password
@@ -49,6 +50,7 @@ def create_user(message):
     cur.close()
     con.close()
 
+
 def give_likes(message, name):
     con = DBconnect()
     cur = con.cursor()
@@ -65,14 +67,16 @@ def give_likes(message, name):
     cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (reciever_id, guild_id))
     rec = cur.fetchone()
     cur.execute("UPDATE users SET free_likes = %s WHERE user_id = %s AND guild_id = %s", (0, author_id, guild_id))
-    cur.execute("UPDATE users SET likes = %s WHERE user_id = %s AND guild_id = %s", (rec[5]+1, reciever_id, guild_id))
-    cur.execute("UPDATE users SET recieved_likes = %s WHERE user_id = %s AND guild_id = %s", (rec[6]+1, reciever_id, guild_id))
+    cur.execute("UPDATE users SET likes = %s WHERE user_id = %s AND guild_id = %s", (rec[5] + 1, reciever_id, guild_id))
+    cur.execute("UPDATE users SET recieved_likes = %s WHERE user_id = %s AND guild_id = %s",
+                (rec[6] + 1, reciever_id, guild_id))
 
     print("апдейт епт")
     con.commit()
 
     cur.close()
     con.close()
+
 
 def midnight_update():
     con = DBconnect()
@@ -103,7 +107,9 @@ class likes(commands.Cog):
     @commands.command(aliases=['статус', 'Статус', 'Status'])
     async def status(self, ctx):
         await ctx.send("Статус")
-        create_user(ctx.message)
+        user = create_user(ctx.message)
+        embed=functs.status_embed(ctx, user)
+        await ctx.send(embed=embed)
 
     @commands.command()
     async def midnight(self, ctx):
