@@ -28,7 +28,10 @@ class fun(commands.Cog):
     async def pokonyam(self, ctx):
         author = ctx.message.author
         role = discord.utils.get(author.guild.roles, name='Хотсеры')
-        await ctx.send(f'{role.mention}, по коням!')
+        TEXTS = [f'{role.mention}, у нас дейлик. Возможно криминал. По коням!',
+                 f'{role.mention}, общий сбор!',
+                 f'{role.mention}, настало ваше время!']
+        await ctx.send(random.choice(TEXTS))
 
 def setup(client):
     client.add_cog(fun(client))

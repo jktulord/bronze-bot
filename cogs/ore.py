@@ -7,14 +7,46 @@ from urllib.parse import urlparse
 import functs
 import time
 
-COPPER_ORE = "Медная руда"
-TIN_ORE = "Оловянная руда"
-BRONZE_INGOT = "Бронзовые слитки"
-UNDEFINED_ORE = "Неопределенная руда"
+COPPER_ORE = "Медная руда" #3
+TIN_ORE = "Оловянная руда" #4
+BRONZE_INGOT = "Бронзовые слитки" #5
+UNDEFINED_ORE = "Неопределенная руда" #6
 
-def res_dict():
-    res_dict = {COPPER_ORE: 0, TIN_ORE: 0, BRONZE_INGOT: 0}
-    return res_dict
+
+class res():
+    def __init__(self, copper=0, tin=0, bronze=0):
+        self.dict = {COPPER_ORE: copper, TIN_ORE: tin, BRONZE_INGOT: bronze}
+
+    def line(self):
+        line = ""
+        for i in self.dict:
+            line += i + str(self.dict[i]) + ' '
+        return line
+
+
+
+class recipe(object):
+    def __init__(self, name, tag, req_dict, out_dict):
+        self.name = name
+        self.tag = tag
+        self.req_dict = req_dict
+        self.out_dict = out_dict
+
+class recipe_shop(object):
+    def __init__(self, name, tag, req_dict, out_funct):
+        self.name = name
+        self.tag = tag
+        self.req_dict = req_dict
+        self.out_funct = out_funct
+
+
+bronze_recipe = recipe("Бронзовый Слиток", "bronze", res(copper=4, tin=2), res(bronze=2))
+recipes = [bronze_recipe]
+
+promote1 = recipe("Повышение до Бронзовенят", "promote", res(bronze=1), res())
+choose_color = recipe("Выбрать цвет", "color", res(bronze=3), res())
+call_to_max = recipe("Вовозвание к Максу", "call_to_Max", res(bronze=5), res())
+shoplist = [promote1, choose_color, call_to_max]
 
 
 def DBconnect():
@@ -53,9 +85,9 @@ def get_user(message):
                     "(%s, %s, %s, 0, 0, 0, 3)", (author_id, name, guild_id))
 
     if user[3] is None:
-        cur.execute("UPDATE users SET copper_ore = %s, tin_ore=%s, bronze_ingot=%s, undefined_ore=%s WHERE user_id = %s AND guild_id = %s",
-                    (0,0,0,3, author_id, guild_id))
-
+        cur.execute(
+            "UPDATE users SET copper_ore = %s, tin_ore=%s, bronze_ingot=%s, undefined_ore=%s WHERE user_id = %s AND guild_id = %s",
+            (0, 0, 0, 3, author_id, guild_id))
 
     print(user)
 
@@ -82,7 +114,7 @@ def give_undefined_ore(message, name):
     cur.execute("SELECT * FROM users WHERE user_id = %s AND guild_id = %s", (reciever_id, guild_id))
     rec = cur.fetchone()
 
-    res_given = res_dict()
+    res_given = res()
     print(giv[6] + 1)
     for i in range(giv[6]):
         rnd = random.randint(1, 100)
@@ -149,6 +181,12 @@ class likes(commands.Cog):
         gl = give_undefined_ore(ctx.message, name)
         embed = functs.give_embed(ctx, gl[0], gl[1], gl[2])
         await ctx.send(embed=embed)
+
+    async def craft(self, ctx, name="1"):
+        if name == "1":
+            embed = functs.craft_list_embed(ctx, recipes)
+            await ctx.send(embed=embed)
+
 
 
 def setup(client):

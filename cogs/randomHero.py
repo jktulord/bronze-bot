@@ -55,7 +55,9 @@ class random_Hero(commands.Cog):
 
         if tag in ["Help", "help"]:
             embed = functs.text_embed('Команде randomHero требуется тег '
-                                      '(Доступные теги:Вcе, Маги, ААтакеры, Ебоклаки, Лекари, Жир, Поддержка)')
+                                      '(Доступные теги:Вcе, Маги, ААтакеры, Ебоклаки, Лекари, Жир, Танк, Брузер, '
+                                      'Поддержка)')
+
             await ctx.send(embed=embed)
         else:
             embed = functs.text_embed("БОГ РАНДОМА ПОВЕЛЕВАЕТ, пикай вот это: " + chosen_hero, name="БОГ РАНДОМА")

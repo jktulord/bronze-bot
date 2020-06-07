@@ -73,3 +73,13 @@ def stats_embed(ctx):
     embed.add_field(name='Ddg', value='4%', inline=True)
 
     return embed
+
+def craft_list_embed(ctx, recipes):
+    embed = discord.Embed(
+        Title='Title',
+        description='Рецепты',
+        colour=discord.Color.light_grey()
+    )
+    for i in recipes:
+        embed.add_field(name=i.name, value=i.req_dict.line(), inline=False)
+        embed.add_field(name=i.tag, value=i.out_dict.line(), inline=True)
