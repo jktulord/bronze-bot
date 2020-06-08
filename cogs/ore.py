@@ -41,7 +41,7 @@ class recipe_shop(object):
         self.out_funct = out_funct
 
 
-bronze_recipe = recipe("Бронзовый Слиток", "bronze", res(copper=4, tin=2), res(bronze=2))
+bronze_recipe = recipe("1# Бронзовый Слиток", "bronze", res(copper=4, tin=2), res(bronze=2))
 recipes = [bronze_recipe]
 
 promote1 = recipe("Повышение до Бронзовенят", "promote", res(bronze=1), res())
