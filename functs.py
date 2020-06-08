@@ -81,7 +81,7 @@ def craft_list_embed(ctx, recipes):
         colour=discord.Color.light_grey()
     )
     for i in recipes:
-        embed.add_field(name=i.name+" tag : "+i.tag, value=i.req_dict.line(), inline=True)
+        embed.add_field(name=i.name+" ["+i.tag+"] ", value=i.req_dict.line(), inline=True)
         embed.add_field(name="Получаемые ресурсы:", value=i.out_dict.line(), inline=False)
         embed.set_footer(text="используй !сraft [tag]")
 
