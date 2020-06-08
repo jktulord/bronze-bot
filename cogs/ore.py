@@ -20,7 +20,8 @@ class res():
     def line(self):
         line = ""
         for i in self.dict:
-            line += i + str(self.dict[i]) + ' '
+            if self.dict[i] != 0:
+                line += i + str(self.dict[i]) + ' '
         return line
 
 
