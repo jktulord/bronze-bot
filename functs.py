@@ -83,5 +83,6 @@ def craft_list_embed(ctx, recipes):
     for i in recipes:
         embed.add_field(name=i.name, value=i.req_dict.line(), inline=True)
         embed.add_field(name="tag : "+i.tag, value=i.out_dict.line(), inline=False)
+        embed.set_footer(text="используй !сraft [tag]")
 
     return embed
