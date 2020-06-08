@@ -43,7 +43,7 @@ class random_Hero(commands.Cog):
             chosen_hero = random.choice(data["Жир"])
         elif tag in ["Танк", "танк", "танки", "Танки"]:
             chosen_hero = random.choice(data["Танки1"])
-        elif tag in ["Брузяхи", "брузяхи", "Брузяха", "брузяха"]:
+        elif tag in ["Брузяхи", "брузяхи", "Брузяха", "брузяха", "брузеры", "Брузеры", "брузер", "Брузер"]:
             chosen_hero = random.choice(data["Брузяхи1"])
 
         elif tag in ["Лекари", "Лекарь", "лекари", "лекарь"]:
