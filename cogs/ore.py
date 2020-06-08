@@ -182,6 +182,7 @@ class ore(commands.Cog):
         embed = functs.give_embed(ctx, gl[0], gl[1], gl[2])
         await ctx.send(embed=embed)
 
+    @commands.command()
     async def craft(self, ctx, name="1"):
         if name == "1":
             embed = functs.craft_list_embed(ctx, recipes)
