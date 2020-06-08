@@ -155,7 +155,7 @@ def midnight_update():
     con.close()
 
 
-class likes(commands.Cog):
+class ore(commands.Cog):
 
     def __init__(self, client):
         self.client = client
@@ -190,4 +190,4 @@ class likes(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(likes(client))
+    client.add_cog(ore(client))

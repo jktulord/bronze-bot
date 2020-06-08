@@ -10,17 +10,9 @@ class fun(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=['стуков'])
-    async def stukhov(self, ctx):
-       await ctx.send('АЛЕКСЕЙ')
-
     @commands.command(aliases=['алексей'])
     async def aleksey(self, ctx):
         await ctx.send('СТУКОВ')
-
-    @commands.command(aliases=['мечи'])
-    async def swords(self, ctx):
-        await ctx.send('мечи')
 
     @commands.command(aliases=['поконям'])
     async def pokonyam(self, ctx):
