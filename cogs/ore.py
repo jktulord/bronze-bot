@@ -21,7 +21,7 @@ class res():
         line = ""
         for i in self.dict:
             if self.dict[i] != 0:
-                line += i + str(self.dict[i]) + ' '
+                line += i + " = " + str(self.dict[i]) + ' '
         return line
 
 
