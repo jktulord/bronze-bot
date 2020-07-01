@@ -18,4 +18,4 @@ class imgur(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(fun(client))
+    client.add_cog(imgur(client))
