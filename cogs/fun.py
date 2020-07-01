@@ -19,6 +19,8 @@ class fun(commands.Cog):
         author = ctx.message.author
         role = discord.utils.get(author.guild.roles, name='Хотсеры')
         TEXTS = [f'{role.mention}, у нас дейлик. Возможно криминал. По коням!',
+                 f'{role.mention}, вылезайте уже из Лола!',
+                 f'{role.mention}, хватит играть в chess royal!',
                  f'{role.mention}, общий сбор!',
                  f'{role.mention}, настало ваше время!']
         await ctx.send(random.choice(TEXTS))

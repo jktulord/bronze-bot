@@ -13,6 +13,24 @@ BRONZE_INGOT = "Бронзовые слитки" #5
 UNDEFINED_ORE = "Неопределенная руда" #6
 
 
+def DBconnect():
+    # for python 3+ use: from urllib.parse import urlparse
+    result = urlparse(
+        "postgres://rxzevzulpptnsi:2c4a3df53f8e0668ec61b0eba19cdd003f577a5321eb1b987e3c10bb0ed5ca63@ec2-54-247-122-209.eu-west-1.compute.amazonaws.com:5432/d2s131ckgn5o6k")
+    # also in python 3+ use: urlparse("YourUrl") not urlparse.urlparse("YourUrl")
+    username = result.username
+    password = result.password
+    database = result.path[1:]
+    hostname = result.hostname
+    con = psycopg2.connect(
+        database=database,
+        user=username,
+        password=password,
+        host=hostname,
+        port=5432
+    )
+    return con
+
 class res():
     def __init__(self, copper=0, tin=0, bronze=0):
         self.dict = {COPPER_ORE: copper, TIN_ORE: tin, BRONZE_INGOT: bronze}
@@ -40,33 +58,22 @@ class recipe_shop(object):
         self.req_dict = req_dict
         self.out_funct = out_funct
 
+def search_by_tags(recipes, tag):
+    ret = None
+    for i in recipes:
+        if i.tag == tag:
+            ret = i
+            break
+    return ret
 
 bronze_recipe = recipe("1# Бронзовый Слиток", "bronze", res(copper=4, tin=2), res(bronze=2))
+recipe_tags = ["bronze"]
 recipes = [bronze_recipe]
 
 promote1 = recipe("Повышение до Бронзовенят", "promote", res(bronze=1), res())
 choose_color = recipe("Выбрать цвет", "color", res(bronze=3), res())
 call_to_max = recipe("Вовозвание к Максу", "call_to_Max", res(bronze=5), res())
 shoplist = [promote1, choose_color, call_to_max]
-
-
-def DBconnect():
-    # for python 3+ use: from urllib.parse import urlparse
-    result = urlparse(
-        "postgres://rxzevzulpptnsi:2c4a3df53f8e0668ec61b0eba19cdd003f577a5321eb1b987e3c10bb0ed5ca63@ec2-54-247-122-209.eu-west-1.compute.amazonaws.com:5432/d2s131ckgn5o6k")
-    # also in python 3+ use: urlparse("YourUrl") not urlparse.urlparse("YourUrl")
-    username = result.username
-    password = result.password
-    database = result.path[1:]
-    hostname = result.hostname
-    con = psycopg2.connect(
-        database=database,
-        user=username,
-        password=password,
-        host=hostname,
-        port=5432
-    )
-    return con
 
 
 def get_user(message):
@@ -122,11 +129,11 @@ def give_undefined_ore(message, name):
         if rnd > 33:
             cur.execute("UPDATE users SET copper_ore = %s WHERE user_id = %s AND guild_id = %s",
                         (rec[3] + 1, reciever_id, guild_id))
-            res_given[COPPER_ORE] += 1
+            res_given.dict[COPPER_ORE] += 1
         else:
             cur.execute("UPDATE users SET tin_ore = %s WHERE user_id = %s AND guild_id = %s",
                         (rec[4] + 1, reciever_id, guild_id))
-            res_given[TIN_ORE] += 1
+            res_given.dict[TIN_ORE] += 1
 
     cur.execute("UPDATE users SET undefined_ore = %s WHERE user_id = %s AND guild_id = %s", (0, author_id, guild_id))
 
@@ -137,6 +144,22 @@ def give_undefined_ore(message, name):
     con.close()
 
     return [giv, rec, res_given]
+
+
+def craft_item(message, user, tag):
+    con = DBconnect()
+    cur = con.cursor()
+
+    author_id = str(message.author.id)
+    guild_id = str(message.guild.id)
+
+    recipe = search_by_tags(recipes, tag)
+
+
+    con.commit()
+
+    cur.close()
+    con.close()
 
 
 def midnight_update():
@@ -188,6 +211,10 @@ class ore(commands.Cog):
         if name == "1":
             embed = functs.craft_list_embed(ctx, recipes)
             await ctx.send(embed=embed)
+        else:
+            if name in recipe_tags:
+                user = get_user(ctx.message)
+                craft_item(ctx.message, user, name)
 
 
 

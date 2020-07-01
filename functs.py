@@ -1,6 +1,6 @@
 import discord
 
-NAME = 'BronzeTech-0.3.0'
+NAME = 'BronzeTech-0.3.1'
 
 COPPER_ORE = "Медная руда"
 TIN_ORE = "Оловянная руда"
@@ -74,6 +74,7 @@ def stats_embed(ctx):
 
     return embed
 
+
 def craft_list_embed(ctx, recipes):
     embed = discord.Embed(
         Title='Title',
@@ -81,8 +82,18 @@ def craft_list_embed(ctx, recipes):
         colour=discord.Color.light_grey()
     )
     for i in recipes:
-        embed.add_field(name=i.name+" ["+i.tag+"] ", value=i.req_dict.line(), inline=True)
+        embed.add_field(name=i.name + " [" + i.tag + "] ", value=i.req_dict.line(), inline=True)
         embed.add_field(name="Получаемые ресурсы:", value=i.out_dict.line(), inline=True)
         embed.set_footer(text="используй !сraft [tag]")
+
+    return embed
+
+def embed_picture(ctx, name=NAME):
+    embed = discord.Embed(
+        Title='Title',
+        colour=discord.Color.orange()
+    )
+    embed.set_author(name=name)
+    embed.set_image(url="https://imgur.com/random")
 
     return embed
