@@ -63,7 +63,7 @@ class factions(commands.Cog):
         else:
             color = discord.Color.lighter_grey()
             quote = " издает звуки панд"
-        embed = functs.text_embed("*" + author.name + quote + "*", color=color)
+        embed = functs.text_embed("*" + author.name + quote + "*", color=color, name=None)
         await ctx.send(embed=embed)
 
 

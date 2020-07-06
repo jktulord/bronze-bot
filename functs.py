@@ -14,7 +14,8 @@ def text_embed(text, name=NAME, color=discord.Color.orange()):
         description=text,
         colour=color
     )
-    embed.set_author(name=name)
+    if name is not None:
+        embed.set_author(name=name)
 
     return embed
 
