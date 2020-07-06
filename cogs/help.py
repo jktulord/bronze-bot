@@ -24,7 +24,7 @@ class help(commands.Cog):
         embed.add_field(name='!getNews', value="Новостная Подписка", inline=False)
         embed.add_field(name='!pokonyam', value="Зовет всех Хотсеров в Хотс", inline=False)
         embed.add_field(name='!randomHero',
-                        value="Выдает случайного героя. Для работы требуются Теги(список всех тегов: Все, ААтакеры, "
+                        value="Выдает случайного героя. Для работы требуются Теги. (список всех тегов: Все, ААтакеры, "
                               "Маги, Жир, Танки, Брузяхи, Лекари, Поддержка, Ебоклаки)",
                         inline=False)
 
