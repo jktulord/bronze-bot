@@ -29,6 +29,11 @@ class help(commands.Cog):
                               "Маги, Жир, Танки, Брузяхи, Лекари, Поддержка, Ебоклаки)",
                         inline=False)
 
+        embed.add_field(name='-', value="-----Фракционные команды-----", inline=False)
+        embed.add_field(name='---!getHorde---', value="Вступление в Орду", inline=False)
+        embed.add_field(name='---!getAlliance---', value="Вступление в Альянс", inline=False)
+        embed.add_field(name='---!battleCry---', value="Боевой клич", inline=False)
+
         embed.add_field(name='-', value="-----Фановые команды-----", inline=False)
         embed.add_field(name='---!infinity---', value="Показывает Бесконечность", inline=False)
         embed.add_field(name='---!aleksey---', value="Отправляет сообщение СТУКОВ", inline=False)
