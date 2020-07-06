@@ -56,15 +56,20 @@ class factions(commands.Cog):
         color = discord.Color.lighter_grey()
         if Allience_role in author.roles:
             color = discord.Color.blue()
-            quote = " кричит 'ЗА АЛЬЯНС'"
+            quote = " кричит 'ЗА АЛЬЯНС!'"
         elif Horde_role in author.roles:
             color = discord.Color.red()
-            quote = " кричит 'ЗА ОРДУ'"
+            quote = " кричит 'ЗА ОРДУ!'"
         else:
             color = discord.Color.lighter_grey()
             quote = " издает звуки панд"
         embed = functs.text_embed("*" + author.name + quote + "*", color=color, name=None)
         await ctx.send(embed=embed)
+
+    @commands.command(aliases=['танец'])
+    async def dance(self, ctx):
+        dance = discord.CustomActivity(name="танцует")
+        await self.client.change_presence(status=discord.Status.idle, activity=dance)
 
 
 def setup(client):
