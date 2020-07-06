@@ -64,6 +64,7 @@ class factions(commands.Cog):
             color = discord.Color.lighter_grey()
             quote = " издает звуки панд"
         embed = functs.text_embed("*" + author.name + quote + "*", color=color, name=None)
+        await ctx.channel.purge(limit=1)
         await ctx.send(embed=embed)
 
     @commands.command(aliases=['танец'])
