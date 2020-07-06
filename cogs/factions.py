@@ -49,7 +49,7 @@ class factions(commands.Cog):
             await ctx.send(embed=embed)
 
     @commands.command(aliases=['БоевойКлич'])
-    async def BattleCry(self, ctx):
+    async def battleCry(self, ctx):
         author = ctx.message.author
         Horde_role = discord.utils.get(author.guild.roles, name='Орда')
         Allience_role = discord.utils.get(author.guild.roles, name='Альянс')
