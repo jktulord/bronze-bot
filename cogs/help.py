@@ -32,7 +32,7 @@ class help(commands.Cog):
         embed.add_field(name='!aleksey', value="Отправляет сообщение СТУКОВ", inline=False)
         embed.add_field(name='!stukhov', value="Отправляет сообщение АЛЕКСЕЙ", inline=False)
 
-        await ctx.send('СТУКОВ')
+        await ctx.send(embed)
 
 
 def setup(client):
