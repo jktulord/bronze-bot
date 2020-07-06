@@ -29,7 +29,7 @@ class factions(commands.Cog):
             embed = functs.text_embed(author.name + ' теперь Ордынец')
             await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(aliases=['getAlliance'])
     async def getAllience(self, ctx):
         author = ctx.message.author
         Horde_role = discord.utils.get(author.guild.roles, name='Орда')
