@@ -10,8 +10,8 @@ class imgur(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=["Imgur"])
-    async def imgur(self, ctx):
+    @commands.command(aliases=["бесонечность"])
+    async def infinity(self, ctx):
         embed = functs.embed_picture(ctx)
         await ctx.send(embed=embed)
 

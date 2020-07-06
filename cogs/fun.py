@@ -21,6 +21,7 @@ class fun(commands.Cog):
         TEXTS = [f'{role.mention}, у нас дейлик. Возможно криминал. По коням!',
                  f'{role.mention}, вылезайте уже из Лола!',
                  f'{role.mention}, хватит играть в chess royal!',
+                 f'{role.mention}, пошли в старкра... Нет? Ладно, идем в хотс!',
                  f'{role.mention}, общий сбор!',
                  f'{role.mention}, настало ваше время!']
         await ctx.send(random.choice(TEXTS))
