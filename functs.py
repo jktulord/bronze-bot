@@ -8,11 +8,11 @@ BRONZE_INGOT = "Бронзовые слитки"
 UNDEFINED_ORE = "Неопределенная руда"
 
 
-def text_embed(text, name=NAME):
+def text_embed(text, name=NAME, color=discord.Color.orange()):
     embed = discord.Embed(
         Title='Title',
         description=text,
-        colour=discord.Color.orange()
+        colour=color
     )
     embed.set_author(name=name)
 
