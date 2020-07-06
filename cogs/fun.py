@@ -14,6 +14,10 @@ class fun(commands.Cog):
     async def aleksey(self, ctx):
         await ctx.send('СТУКОВ')
 
+    @commands.command(aliases=['стуков'])
+    async def stukhov(self, ctx):
+        await ctx.send('АЛЕКСЕЙ')
+
     @commands.command(aliases=['поконям'])
     async def pokonyam(self, ctx):
         author = ctx.message.author
