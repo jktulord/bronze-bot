@@ -5,7 +5,7 @@ from discord.ext import commands
 import functs
 
 
-class fun(commands.Cog):
+class help(commands.Cog):
 
     def __init__(self, client):
         self.client = client
@@ -36,4 +36,4 @@ class fun(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(fun(client))
+    client.add_cog(help(client))
