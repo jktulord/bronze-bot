@@ -10,7 +10,7 @@ class fun(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command(aliases=['алексей'])
+    @commands.command(aliases=['помощь'])
     async def help(self, ctx):
         embed = discord.Embed(
             color=discord.Color.orange()
