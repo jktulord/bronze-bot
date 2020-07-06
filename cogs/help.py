@@ -20,7 +20,7 @@ class help(commands.Cog):
 
         embed.add_field(name='---!help----', value="Показывает это сообщение", inline=False)
 
-        embed.add_field(name='----------------', value="-----Ролевые команды-----", inline=False)
+        embed.add_field(name='-', value="-----Ролевые команды-----", inline=False)
         embed.add_field(name='---!getHots---', value="Получение Роли Хотсеры", inline=False)
         embed.add_field(name='---!getNews---', value="Новостная Подписка", inline=False)
         embed.add_field(name='---!pokonyam---', value="Зовет всех Хотсеров в Хотс", inline=False)
@@ -29,7 +29,7 @@ class help(commands.Cog):
                               "Маги, Жир, Танки, Брузяхи, Лекари, Поддержка, Ебоклаки)",
                         inline=False)
 
-        embed.add_field(name='----------------', value="-----Фановые команды-----", inline=False)
+        embed.add_field(name='-', value="-----Фановые команды-----", inline=False)
         embed.add_field(name='---!infinity---', value="Показывает Бесконечность", inline=False)
         embed.add_field(name='---!aleksey---', value="Отправляет сообщение СТУКОВ", inline=False)
         embed.add_field(name='---!stukhov---', value="Отправляет сообщение АЛЕКСЕЙ", inline=False)
