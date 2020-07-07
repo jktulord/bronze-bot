@@ -48,7 +48,7 @@ class factions(commands.Cog):
             embed = functs.text_embed(author.name + ' теперь Альянсер', color=discord.Color.blue())
             await ctx.send(embed=embed)
 
-    @commands.command(aliases=['БоевойКлич'])
+    @commands.command(aliases=['боевойКлич', 'заАльянс', 'заОрду'])
     async def battleCry(self, ctx):
         author = ctx.message.author
         Horde_role = discord.utils.get(author.guild.roles, name='Орда')
@@ -63,6 +63,24 @@ class factions(commands.Cog):
         else:
             color = discord.Color.lighter_grey()
             quote = " издает звуки панд"
+        embed = functs.text_embed("*" + author.name + quote + "*", color=color, name=None)
+        await ctx.send(embed=embed)
+
+    @commands.command(aliases=['заАзерот','заaзерот',"forazeroth"])
+    async def forAzeroth(self, ctx):
+        author = ctx.message.author
+        Horde_role = discord.utils.get(author.guild.roles, name='Орда')
+        Allience_role = discord.utils.get(author.guild.roles, name='Альянс')
+        color = discord.Color.lighter_grey()
+        if Allience_role in author.roles:
+            color = discord.Color.blue()
+            quote = " кричит 'ЗА АЗЕРОТ!'"
+        elif Horde_role in author.roles:
+            color = discord.Color.red()
+            quote = " кричит 'ЗА АЗЕРОТ!'"
+        else:
+            color = discord.Color.lighter_grey()
+            quote = " издает не членораздельные звуки панд "
         embed = functs.text_embed("*" + author.name + quote + "*", color=color, name=None)
         await ctx.send(embed=embed)
 
