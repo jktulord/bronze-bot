@@ -80,7 +80,7 @@ class factions(commands.Cog):
             quote = " кричит 'ЗА АЗЕРОТ!'"
         else:
             color = discord.Color.lighter_grey()
-            quote = " издает не членораздельные звуки панд "
+            quote = " издает какие-то членораздельные звуки панд похожие на 'ЗА АЗЕРОТ!'"
         embed = functs.text_embed("*" + author.name + quote + "*", color=color, name=None)
         await ctx.send(embed=embed)
 
