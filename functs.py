@@ -1,6 +1,6 @@
 import discord
 
-NAME = 'BronzeTech-0.3.4 "Крикливый" Апдейт '
+NAME = 'BronzeTech-0.3.6 Апдейт "Косморемесленный" '
 
 COPPER_ORE = "Медная руда"
 TIN_ORE = "Оловянная руда"

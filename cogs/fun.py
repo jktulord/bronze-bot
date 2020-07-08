@@ -30,8 +30,8 @@ class fun(commands.Cog):
                  f'{role.mention}, настало ваше время!']
         await ctx.send(random.choice(TEXTS))
 
-    @commands.command(aliases=['поконям'])
-    async def pokonyam(self, ctx):
+    @commands.command(aliases=['говск'])
+    async def govSC(self, ctx):
         author = ctx.message.author
         role = discord.utils.get(author.guild.roles, name='Старкрафтеры')
         TEXTS = [f'{role.mention}, новый кооп командир вышел. Инфа 100%!',
