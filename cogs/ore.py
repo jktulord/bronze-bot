@@ -31,6 +31,7 @@ def DBconnect():
     )
     return con
 
+
 class res():
     def __init__(self, copper=0, tin=0, bronze=0):
         self.dict = {COPPER_ORE: copper, TIN_ORE: tin, BRONZE_INGOT: bronze}
@@ -41,7 +42,6 @@ class res():
             if self.dict[i] != 0:
                 line += i + " = " + str(self.dict[i]) + ' '
         return line
-
 
 
 class recipe(object):

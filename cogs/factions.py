@@ -66,7 +66,7 @@ class factions(commands.Cog):
         embed = functs.text_embed("*" + author.name + quote + "*", color=color, name=None)
         await ctx.send(embed=embed)
 
-    @commands.command(aliases=['заАзерот','заaзерот',"forazeroth"])
+    @commands.command(aliases=['заАзерот', 'заaзерот', "forazeroth"])
     async def forAzeroth(self, ctx):
         author = ctx.message.author
         Horde_role = discord.utils.get(author.guild.roles, name='Орда')

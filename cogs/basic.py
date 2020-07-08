@@ -42,6 +42,21 @@ class basic(commands.Cog):
             embed = functs.text_embed(author.name + ' теперь Хотсер')
             await ctx.send(embed=embed)
 
+    @commands.command(aliases=['getSC', 'getsc'])
+    async def getSC2(self, ctx):
+        author = ctx.message.author
+        role = discord.utils.get(author.guild.roles, name='Старкрафтеры')
+        if role in author.roles:
+            roles = author.roles
+            roles.remove(role)
+            await author.edit(roles=roles)
+            embed = functs.text_embed(author.name + ' теперь НЕ Старкрафтер')
+            await ctx.send(embed=embed)
+        else:
+            await author.add_roles(role)
+            embed = functs.text_embed(author.name + ' теперь Старкрафтер')
+            await ctx.send(embed=embed)
+
     @commands.command()
     async def getNews(self, ctx):
         author = ctx.message.author
