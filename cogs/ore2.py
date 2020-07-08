@@ -81,7 +81,7 @@ def get_user(message):
     return user
 
 
-"""
+
 class ore2(commands.Cog):
 
     def __init__(self, client):
@@ -90,16 +90,15 @@ class ore2(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print("Bot is online.....")
-
+    """
     @commands.command(aliases=['статус', 'Статус', 'Status'])
     async def status(self, ctx):
         user = get_user(ctx.message)
         embed = functs.status_embed(ctx, user)
         await ctx.send(embed=embed)
-
+    """
 
 
 
 def setup(client):
     client.add_cog(ore2(client))
-"""
