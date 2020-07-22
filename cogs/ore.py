@@ -188,6 +188,7 @@ class ore(commands.Cog):
     async def on_ready(self):
         print("Bot is online.....")
 
+    """
     @commands.command(aliases=['статус', 'Статус', 'Status'])
     async def status(self, ctx):
         user = get_user(ctx.message)
@@ -215,7 +216,7 @@ class ore(commands.Cog):
             if name in recipe_tags:
                 user = get_user(ctx.message)
                 craft_item(ctx.message, user, name)
-
+    """
 
 
 def setup(client):
