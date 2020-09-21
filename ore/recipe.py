@@ -30,13 +30,14 @@ NAME = "name"
 GUILD_ID = "guild_id"
 COPPER_ORE = "Медная руда"  # 3
 TIN_ORE = "Оловянная руда"  # 4
-BRONZE_INGOT = "Бронзовый слиток"  # 5
+BRONZE_INGOT = "Бронзовая руда"  # 5
 UNDEFINED_ORE = "Неопределенная руда"  # 6
 
 res_keys_dict = {COPPER_ORE: "item_№1", TIN_ORE: "item_№2", BRONZE_INGOT: "item_№3", UNDEFINED_ORE: "item_№4"}
+res_emoji_id = {BRONZE_INGOT: 747215265573503018}
 
-recipes = {BRONZE_INGOT: recipe(name=BRONZE_INGOT, tag="BRZ", req_dict=res_dict(copper_ore=2, tin_ore=1),
-                                out_dict=res_dict(bronze_ore=1))}
+recipes_dict = {BRONZE_INGOT: recipe(name=BRONZE_INGOT, tag="BRZ", req_dict=res_dict(copper_ore=2, tin_ore=1),
+                                     out_dict=res_dict(bronze_ore=1))}
 
 
 def get_recipe(num=None, name=None, tag=None):
@@ -44,19 +45,19 @@ def get_recipe(num=None, name=None, tag=None):
 
     if num is not None:
         j = 0
-        for i in recipes:
+        for i in recipes_dict:
             j += 1
             if j == num:
-                result = recipes[i]
+                result = recipes_dict[i]
 
     if name is not None:
-        for i in recipes:
-            if recipes[i].name == name:
-                result = recipes[i]
+        for i in recipes_dict:
+            if recipes_dict[i].name == name:
+                result = recipes_dict[i]
 
     if tag is not None:
-        for i in recipes:
-            if recipes[i].tag == tag:
-                result = recipes[i]
+        for i in recipes_dict:
+            if recipes_dict[i].tag == tag:
+                result = recipes_dict[i]
 
     return result

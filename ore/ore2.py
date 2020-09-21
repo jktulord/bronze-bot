@@ -244,7 +244,7 @@ class ore2(commands.Cog):
     @commands.command()
     async def craft(self, ctx, word=None):
         if word is None:
-            embed = functs.craft_list_embed(ctx)
+            embed = functs.craft_list_embed(ctx, recipe.recipes_dict)
             await ctx.send(embed=embed)
         else:
             user_array = get_user_inventory(ctx.message)
