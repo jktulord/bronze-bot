@@ -28,6 +28,7 @@ class offer(object):
         return line
 
 
+
 def raise_up_funct():
     s = 1
 
