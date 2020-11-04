@@ -22,7 +22,8 @@ class factions(commands.Cog):
             embed = functs.text_embed(author.name + ' теперь НЕ Ордынец', color=discord.Color.red())
             await ctx.send(embed=embed)
         elif Allience_role in author.roles:
-            embed = functs.text_embed(author.name + ' Пытается дезертировать (у него не получается).', color=discord.Color.red())
+            embed = functs.text_embed(author.name + ' Пытается дезертировать (у него не получается).',
+                                      color=discord.Color.red())
             await ctx.send(embed=embed)
         else:
             await author.add_roles(Horde_role)
@@ -41,14 +42,15 @@ class factions(commands.Cog):
             embed = functs.text_embed(author.name + ' теперь НЕ Альянсер', color=discord.Color.blue())
             await ctx.send(embed=embed)
         elif Horde_role in author.roles:
-            embed = functs.text_embed(author.name + ' пытается дезертировать (у него не получается).', color=discord.Color.blue())
+            embed = functs.text_embed(author.name + ' пытается дезертировать (у него не получается).',
+                                      color=discord.Color.blue())
             await ctx.send(embed=embed)
         else:
             await author.add_roles(Allience_role)
             embed = functs.text_embed(author.name + ' теперь Альянсер', color=discord.Color.blue())
             await ctx.send(embed=embed)
 
-    @commands.command(aliases=['боевойКлич', 'заАльянс', 'заОрду'])
+    @commands.command(aliases=['боевойКлич', 'заАльянс', 'ЗаАльянс', 'заальянс', 'заОрду', "ForTheHorde"])
     async def battleCry(self, ctx):
         author = ctx.message.author
         Horde_role = discord.utils.get(author.guild.roles, name='Орда')
