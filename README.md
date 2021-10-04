@@ -1,4 +1,7 @@
-# bronze-bot
+# bronze-bot 0.3.7
+
+
+
 * 0.1.0 - bot was created
     * 0.1.0a - added HoBachki 
     * 0.1.1 - command get changed
